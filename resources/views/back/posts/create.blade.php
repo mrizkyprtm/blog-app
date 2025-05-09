@@ -21,9 +21,9 @@
               <input class="mt-1 block w-full rounded-md border border-gray-300 p-1 shadow-sm file:rounded-md file:bg-gray-200 file:p-1.5 focus:border-indigo-500 focus:ring-indigo-500" id="thumbnail" name="thumbnail" type="file" accept="image/*" required>
               <x-input-error class="mt-2" :messages="$errors->get('thumbnail')" />
             </div>
-            <div class="mb-4 md:w-1/2">
+            <div class="mb-4">
               <x-input-label for="body" value="Body" />
-              <textarea class="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" id="body" name="body" rows="10" required></textarea>
+              <textarea class="mt-1 block w-full" id="body" name="body" rows="10">{{ old('body') }}</textarea>
               <x-input-error class="mt-2" :messages="$errors->get('body')" />
             </div>
             <x-primary-button type="submit">Submit</x-primary-button>

@@ -34,6 +34,15 @@
       {{ $slot }}
     </main>
   </div>
+
+  <script src="{{ asset('/vendor/ckeditor/ckeditor.js') }}"></script>
+  <script>
+    ClassicEditor
+      .create(document.querySelector('#body'))
+      .catch(error => {
+        console.error(error);
+      });
+  </script>
 </body>
 
 </html>

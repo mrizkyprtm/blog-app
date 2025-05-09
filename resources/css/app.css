@@ -11,3 +11,19 @@
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+#container {
+  width: 100%;
+  margin: 20px auto;
+}
+
+.ck-editor__editable[role="textbox"] {
+  /* editing area */
+  min-height: 200px;
+}
+
+.ck-content .image {
+  /* block images */
+  max-width: 80%;
+  margin: 20px auto;
+}
