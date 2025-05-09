@@ -32,7 +32,9 @@
                     <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-600">{{ $post->title }}</td>
                     <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-600">{{ $post->created_at->format('d M Y, H:i') }}</td>
                     <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
-                      <button class="mr-2 text-indigo-600 hover:text-indigo-900">Edit</button>
+                      <a class="mr-2 text-indigo-600 hover:text-indigo-900" href="{{ route('back.posts.edit', $post) }}">
+                        Edit
+                      </a>
                       <button class="text-red-600 hover:text-red-900">Delete</button>
                     </td>
                   </tr>
