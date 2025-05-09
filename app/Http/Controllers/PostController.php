@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -45,11 +46,15 @@ class PostController extends Controller
 
   public function edit(Post $post)
   {
+    Gate::authorize('update', $post);
+
     return view('back.posts.edit', compact('post'));
   }
 
   public function update(Request $request, Post $post)
   {
+    Gate::authorize('update', $post);
+
     $validated = $request->validate([
       'title' => 'required|max:255',
       'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5012',
@@ -74,6 +79,8 @@ class PostController extends Controller
 
   public function destroy(Post $post)
   {
+    Gate::authorize('delete', $post);
+
     // Hapus thumbnail dari storage
     if ($post->thumbnail && Storage::disk('public')->exists($post->thumbnail)) {
       Storage::disk('public')->delete($post->thumbnail);
