@@ -35,7 +35,11 @@
                       <a class="mr-2 text-indigo-600 hover:text-indigo-900" href="{{ route('back.posts.edit', $post) }}">
                         Edit
                       </a>
-                      <button class="text-red-600 hover:text-red-900">Delete</button>
+                      <form class="inline" action="{{ route('back.posts.destroy', $post) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button class="text-red-600 hover:text-red-900">Delete</button>
+                      </form>
                     </td>
                   </tr>
                 @empty

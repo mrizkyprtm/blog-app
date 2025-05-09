@@ -74,6 +74,12 @@ class PostController extends Controller
 
   public function destroy(Post $post)
   {
-    //
+    // Hapus thumbnail dari storage
+    if ($post->thumbnail && Storage::disk('public')->exists($post->thumbnail)) {
+      Storage::disk('public')->delete($post->thumbnail);
+    }
+
+    $post->delete();
+    return back()->with('success', 'Post deleted.');
   }
 }
