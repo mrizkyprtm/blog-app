@@ -16,12 +16,26 @@ class PostController extends Controller
 
   public function create()
   {
-    //
+    return view('back.posts.create');
   }
 
   public function store(Request $request)
   {
-    //
+    $validated = $request->validate([
+      'title' => 'required|max:255',
+      'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:5012',
+      'body' => 'required'
+    ]);
+
+    if ($request->hasFile('thumbnail')) {
+      $path =  'thumbnails';
+      $filename = time() . '_' . $request->file('thumbnail')->getClientOriginalName();
+      $thumbnailPath = $request->file('thumbnail')->storeAs($path, $filename, 'public');
+      $validated['thumbnail'] = $thumbnailPath;
+    }
+
+    auth()->user()->posts()->create($validated);
+    return to_route('back.posts.index')->with('success', 'Post created.');
   }
 
   public function show(Post $post)
