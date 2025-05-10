@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FrontPostController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
@@ -21,6 +22,8 @@ Route::middleware('auth')->group(function () {
   Route::prefix('back')->name('back.')->group(function () {
     Route::resource('/posts', PostController::class);
   });
+
+  Route::post('posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 });
 
 require __DIR__ . '/auth.php';

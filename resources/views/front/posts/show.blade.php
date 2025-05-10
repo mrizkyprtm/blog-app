@@ -2,7 +2,7 @@
 
 @section('content')
   <section class="mx-auto flex max-w-6xl flex-col justify-between gap-y-4 py-12 lg:flex-row lg:px-4">
-    <article class="card bg-base-100 w-full lg:w-[68%]">
+    <article class="card w-full max-sm:px-3 lg:w-[68%]">
       <div class="card-body">
         <div class="">
           <h1 class="card-title text-3xl font-bold">{{ $post->title }}</h1>
@@ -22,12 +22,16 @@
         <div class="mt-2 space-y-4 leading-relaxed">{!! $post->body !!}</div>
 
         <div class="mt-12 rounded">
-          <h4 class="mb-2 text-lg font-bold">Tinggalkan Komentar:</h4>
+          <h4 class="mb-4 text-lg font-bold">Tinggalkan Komentar:</h4>
           @auth
-            <form class="mb-4" action="" method="post">
+            <form action="{{ route('comments.store', $post) }}" method="post">
               @csrf
-              <textarea class="textarea mt-1 w-full" id="body" name="body" placeholder="Tambahkan komentar..." required></textarea>
-              <button class="btn btn-primary mt-2" type="submit">Submit</button>
+              <div class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-50">
+                <textarea class="min-h-24 w-full resize-none border-none bg-transparent p-4 text-sm focus:ring-0" id="body" name="body" placeholder="Tambahkan komentar..." required>{{ old('body') }}</textarea>
+                <div class="flex justify-end border-t border-neutral-200 p-2">
+                  <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+              </div>
             </form>
           @endauth
           @guest
@@ -38,7 +42,69 @@
               </p>
             </div>
           @endguest
-          <hr class="mb-4 border-gray-200">
+
+          <hr class="border-1 my-6 border-neutral-200">
+          <h3 class="flex items-center gap-2 font-bold">
+            Comments
+            <span class="w-fit rounded-full border border-blue-500 bg-blue-500 px-2 py-1 text-xs font-semibold leading-none text-white">
+              25
+            </span>
+          </h3>
+          @foreach ($post->comments as $comment)
+            <div class="py-3 text-sm font-normal">
+              <div class="flex items-start">
+                <div class="w-full">
+                  <div class="pl-2">
+                    <p class="mb-1.5 font-semibold leading-5">{{ $comment->user->name }} <span class="ml-1 text-xs font-normal text-gray-500">• {{ $comment->created_at->longRelativeDiffForHumans() }}</span></p>
+                    <p class="mb-1.5">{{ $comment->body }}</p>
+                  </div>
+                  @auth
+                    <div class="flex gap-1 pl-2 font-medium">
+                      <button class="cursor-pointer rounded-md px-2 py-1 text-xs text-gray-500 transition-colors hover:bg-gray-100" title="Balas komentar" onclick="toggleReplyForm({{ $comment->id }})">
+                        <i class="fa-solid fa-reply mr-0.5 text-xs"></i>
+                        Balas
+                      </button>
+                      <form action="" method="post">
+                        <button class="flex cursor-pointer items-center justify-center gap-1.5 rounded-md px-2 py-1 text-xs font-semibold text-red-500 transition-colors hover:bg-gray-100">
+                          <i class="fa-solid fa-trash"></i>
+                          Hapus
+                        </button>
+                      </form>
+                    </div>
+                  @endauth
+
+                  <form class="mt-1 hidden w-full pl-2" id="reply-form-{{ $comment->id }}" method="post" action="{{ route('comments.store', $post) }}">
+                    @csrf
+                    <input name="parent_id" type="hidden" value="{{ $comment->id }}">
+                    <textarea class="mt-1 w-full rounded border-black/15 p-2 text-sm" name="body" required placeholder="Tulis Balasan..."></textarea>
+                    <button class="mt-1 rounded bg-gray-200 px-2 py-1 text-sm" type="submit">Balas</button>
+                  </form>
+
+                  <div class="ml-2 border-l-2 border-gray-300">
+                    @foreach ($comment->replies as $reply)
+                      <div class="mt-3 flex items-start pl-3">
+                        <div class="ml-2">
+                          <p class="mb-1 font-semibold leading-5">{{ $reply->user->name }}
+                            <span class="ml-1 text-xs font-normal text-gray-500">• {{ $reply->created_at->longRelativeDiffForHumans() }}</span>
+                          </p>
+                          <p>{{ $reply->body }}</p>
+                          @auth
+
+                            <form class="mt-2" action="" method="post">
+                              <button class="flex cursor-pointer items-center justify-center gap-1.5 rounded-md px-2 py-1 text-xs font-semibold text-red-500 transition-colors hover:bg-gray-100">
+                                <i class="fa-solid fa-trash"></i>
+                                Hapus
+                              </button>
+                            </form>
+                          @endauth
+                        </div>
+                      </div>
+                    @endforeach
+                  </div>
+                </div>
+              </div>
+            </div>
+          @endforeach
         </div>
       </div>
     </article>
@@ -63,3 +129,23 @@
     </aside>
   </section>
 @endsection
+
+@push('scripts')
+  <script>
+    let activeReplyFormId = null;
+
+    function toggleReplyForm(commentId) {
+      // Tutup form sebelumnya jika berbeda
+      if (activeReplyFormId && activeReplyFormId !== commentId) {
+        const prevForm = document.getElementById('reply-form-' + activeReplyFormId);
+        if (prevForm) prevForm.classList.add('hidden');
+      }
+
+      const currentForm = document.getElementById('reply-form-' + commentId);
+      if (currentForm) {
+        currentForm.classList.toggle('hidden');
+        activeReplyFormId = currentForm.classList.contains('hidden') ? null : commentId;
+      }
+    }
+  </script>
+@endpush
