@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -21,5 +22,11 @@ class CommentController extends Controller
     ]);
 
     return back()->with('success', 'Comment added.');
+  }
+
+  public function destroy(Comment $comment)
+  {
+    $comment->delete();
+    return back();
   }
 }

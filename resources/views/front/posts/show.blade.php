@@ -64,8 +64,10 @@
                         <i class="fa-solid fa-reply mr-0.5 text-xs"></i>
                         Balas
                       </button>
-                      <form action="" method="post">
-                        <button class="flex cursor-pointer items-center justify-center gap-1.5 rounded-md px-2 py-1 text-xs font-semibold text-red-500 transition-colors hover:bg-gray-100">
+                      <form action="{{ route('comments.destroy', $comment->id) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button class="flex cursor-pointer items-center justify-center gap-1.5 rounded-md px-2 py-1 text-xs font-semibold text-red-500 transition-colors hover:bg-gray-100" type="submit">
                           <i class="fa-solid fa-trash"></i>
                           Hapus
                         </button>
@@ -89,9 +91,10 @@
                           </p>
                           <p>{{ $reply->body }}</p>
                           @auth
-
-                            <form class="mt-2" action="" method="post">
-                              <button class="flex cursor-pointer items-center justify-center gap-1.5 rounded-md px-2 py-1 text-xs font-semibold text-red-500 transition-colors hover:bg-gray-100">
+                            <form class="mt-2" action="{{ route('comments.destroy', $reply->id) }}" method="post">
+                              @csrf
+                              @method('delete')
+                              <button class="flex cursor-pointer items-center justify-center gap-1.5 rounded-md px-2 py-1 text-xs font-semibold text-red-500 transition-colors hover:bg-gray-100" type="submit">
                                 <i class="fa-solid fa-trash"></i>
                                 Hapus
                               </button>
