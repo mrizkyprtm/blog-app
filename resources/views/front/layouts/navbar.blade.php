@@ -6,7 +6,6 @@
         <a class="text-xl font-bold text-blue-600" href="{{ route('home') }}">Simple Blog</a>
         <nav class="ml-10 hidden space-x-4 md:flex">
           <a class="text-gray-700 transition hover:text-blue-600" href="{{ route('home') }}">Home</a>
-          <a class="text-gray-700 transition hover:text-blue-600" href="#">Postingan</a>
         </nav>
       </div>
 
@@ -39,7 +38,6 @@
   <!-- Mobile Nav -->
   <div class="space-y-2 bg-white px-4 pb-4 font-medium md:hidden" x-show="open" x-transition>
     <a class="block text-gray-700 hover:text-blue-600" href="{{ route('home') }}">Home</a>
-    <a class="block text-gray-700 hover:text-blue-600" href="#">Postingan</a>
 
     @auth
       <form method="POST" action="{{ route('logout') }}">
