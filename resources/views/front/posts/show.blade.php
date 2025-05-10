@@ -48,10 +48,10 @@
           <h3 class="flex items-center gap-2 font-bold">
             Comments
             <span class="w-fit rounded-full border border-blue-500 bg-blue-500 px-2 py-1 text-xs font-semibold leading-none text-white">
-              25
+              {{ $totalComments }}
             </span>
           </h3>
-          @foreach ($post->comments as $comment)
+          @foreach ($post->comments->whereNull('parent_id') as $comment)
             <div class="py-3 text-sm font-normal">
               <div class="flex items-start">
                 <div class="w-full">
