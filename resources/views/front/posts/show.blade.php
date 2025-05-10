@@ -93,7 +93,7 @@
                           </p>
                           <p>{{ $reply->body }}</p>
                           @auth
-                            @can('delete', $comment)
+                            @can('delete', $reply)
                               <form class="mt-2" action="{{ route('comments.destroy', $reply->id) }}" method="post">
                                 @csrf
                                 @method('delete')
