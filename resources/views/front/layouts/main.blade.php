@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
-  <title>{{ config('app.name') }}</title>
+  <title>@yield('title') | {{ config('app.name') }}</title>
 
   {{-- Fonts --}}
   <link href="https://fonts.bunny.net" rel="preconnect">
@@ -19,7 +19,7 @@
   {{-- Style --}}
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-  <link href="{{ asset('build/assets/app-7brdmFnY.css') }}" rel="stylesheet">
+  <link href="{{ asset('build/assets/app-BrKOZemh.css') }}" rel="stylesheet">
   <script src="{{ asset('build/assets/app-Bf4POITK.js') }}"></script>
 </head>
 

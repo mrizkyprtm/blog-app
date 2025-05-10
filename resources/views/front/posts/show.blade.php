@@ -1,5 +1,6 @@
 @extends('front.layouts.main')
 
+@section('title', $post->title)
 @section('content')
   <section class="mx-auto flex max-w-6xl flex-col justify-between gap-y-4 py-12 lg:flex-row lg:px-4">
     <article class="card w-full max-sm:px-3 lg:w-[68%]">
