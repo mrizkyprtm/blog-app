@@ -12,6 +12,24 @@
     'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+@layer components {
+  .btn {
+    @apply rounded-lg px-4 py-1.5 font-medium text-sm;
+  }
+
+  .btn-primary {
+    @apply bg-blue-500 hover:bg-blue-600 transition-colors duration-200 text-white cursor-pointer;
+  }
+
+  .card {
+    @apply rounded-lg p-6 bg-white;
+  }
+
+  .textarea {
+    @apply rounded-lg px-3 py-2 bg-white border-gray-300 text-sm min-h-24;
+  }
+}
+
 #container {
   width: 100%;
   margin: 20px auto;
