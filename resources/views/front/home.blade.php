@@ -12,24 +12,24 @@
   </section>
 
   <section class="mx-auto max-w-6xl px-4 py-12">
-    <form class="mb-6 flex flex-wrap gap-2" method="GET" action="{{ route('home') }}">
-      <input class="flex-1 rounded border border-gray-200 p-2" name="search" type="text" value="{{ request('search') }}" placeholder="Cari berdasarkan judul...">
+    <form class="mb-6 grid grid-cols-4 grid-rows-3 gap-2 lg:grid-cols-[2fr_repeat(2,_0.7fr)_0.5fr] lg:grid-rows-1" method="GET" action="{{ route('home') }}">
+      <input class="col-span-4 w-full rounded border border-gray-200 p-2 lg:col-span-1 lg:row-span-1" name="search" type="text" value="{{ request('search') }}" placeholder="Cari berdasarkan judul...">
 
-      <select class="w-1/2 rounded border border-gray-200 p-2 md:w-1/4" name="author">
-        <option value="">All Authors</option>
-        @foreach ($authors as $author)
-          <option value="{{ $author->id }}" {{ request('author') == $author->id ? 'selected' : '' }}>
-            {{ $author->name }}
+      <select class="col-span-2 row-start-2 rounded border border-gray-200 p-2 lg:col-span-1 lg:row-span-1" name="category">
+        <option value="">Semua Kategori</option>
+        @foreach ($categories as $category)
+          <option value="{{ $category->slug }}" @selected(request('category') == $category->slug)>
+            {{ $category->name }}
           </option>
         @endforeach
       </select>
 
-      <select class="w-1/2 rounded border border-gray-200 p-2 md:w-1/4" name="order">
+      <select class="col-span-2 col-start-3 row-start-2 rounded border border-gray-200 p-2 lg:col-span-1 lg:row-span-1" name="order">
         <option value="desc" {{ request('order') === 'desc' ? 'selected' : '' }}>Terbaru</option>
         <option value="asc" {{ request('order') === 'asc' ? 'selected' : '' }}>Terlama</option>
       </select>
 
-      <button class="h-fit rounded bg-blue-600 px-4 py-2 text-white lg:w-fit" type="submit">Filter</button>
+      <button class="col-span-4 row-start-3 h-fit w-full rounded bg-blue-600 px-4 py-2 font-semibold text-white lg:col-span-1 lg:row-span-1" type="submit">Filter</button>
     </form>
     <h2 class="mb-6 text-2xl font-semibold text-gray-800">Postingan Terbaru</h2>
 
