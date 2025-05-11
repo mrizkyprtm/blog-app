@@ -10,12 +10,18 @@ class Post extends Model
   use Sluggable;
 
   protected $fillable = [
+    'category_id',
     'user_id',
     'title',
     'slug',
     'thumbnail',
     'body'
   ];
+
+  public function category()
+  {
+    return $this->belongsTo(Category::class);
+  }
 
   public function user()
   {

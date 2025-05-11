@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -11,18 +12,20 @@ class PostController extends Controller
 {
   public function index()
   {
-    $posts = Post::with('user')->where('user_id', '=', auth()->id())->latest()->get();
+    $posts = Post::with('category')->where('user_id', '=', auth()->id())->latest()->paginate(10);
     return view('back.posts.index', compact('posts'));
   }
 
   public function create()
   {
-    return view('back.posts.create');
+    $categories = Category::pluck('name', 'id');
+    return view('back.posts.create', compact('categories'));
   }
 
   public function store(Request $request)
   {
     $validated = $request->validate([
+      'category_id' => 'required|exists:categories,id',
       'title' => 'required|max:255',
       'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:5012',
       'body' => 'required'
@@ -48,7 +51,8 @@ class PostController extends Controller
   {
     Gate::authorize('update', $post);
 
-    return view('back.posts.edit', compact('post'));
+    $categories = Category::pluck('name', 'id');
+    return view('back.posts.edit', compact('post', 'categories'));
   }
 
   public function update(Request $request, Post $post)
@@ -56,6 +60,7 @@ class PostController extends Controller
     Gate::authorize('update', $post);
 
     $validated = $request->validate([
+      'category_id' => 'required|exists:categories,id',
       'title' => 'required|max:255',
       'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5012',
       'body' => 'required'

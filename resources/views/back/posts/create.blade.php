@@ -17,6 +17,16 @@
               <x-input-error class="mt-2" :messages="$errors->get('title')" />
             </div>
             <div class="mb-4 md:w-1/2">
+              <x-input-label for="categories" value="Categories" />
+              <select class="mt-1 w-full rounded-md border border-gray-300 shadow" id="category" name="category_id" required>
+                <option value="">Select Categories</option>
+                @foreach ($categories as $key => $value)
+                  <option value="{{ $key }}" @selected(old('category_id'))>{{ $value }}</option>
+                @endforeach
+              </select>
+              <x-input-error class="mt-2" :messages="$errors->get('category_id')" />
+            </div>
+            <div class="mb-4 md:w-1/2">
               <x-input-label for="thumbnail" value="Thumbnail" />
               <input class="mt-1 block w-full rounded-md border border-gray-300 p-1 shadow-sm file:rounded-md file:bg-gray-200 file:p-1.5 focus:border-indigo-500 focus:ring-indigo-500" id="thumbnail" name="thumbnail" type="file" accept="image/*" required>
               <x-input-error class="mt-2" :messages="$errors->get('thumbnail')" />
