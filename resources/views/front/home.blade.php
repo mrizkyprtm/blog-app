@@ -35,7 +35,7 @@
 
     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       @forelse ($posts as $post)
-        <div class="overflow-hidden rounded-lg bg-white shadow-md transition duration-300 hover:shadow-lg">
+        <div class="group/posts overflow-hidden rounded-lg bg-white shadow-md transition duration-300 hover:shadow-lg">
           @if ($post->thumbnail)
             <div class="relative h-48 overflow-hidden">
               <img class="w-full object-cover transition group-hover/posts:scale-105" src="{{ asset('storage/' . $post->thumbnail) }}" alt="Thumbnail">
@@ -46,7 +46,7 @@
           @endif
           <div class="p-5">
             <h3 class="mb-2 text-lg font-bold text-gray-800">
-              <a class="transition hover:text-blue-600" href="{{ route('posts.show', $post->slug) }}">{{ $post->title }}</a>
+              <a class="transition group-hover/posts:text-blue-600" href="{{ route('posts.show', $post->slug) }}">{{ $post->title }}</a>
             </h3>
             <p class="mb-4 text-sm text-gray-500">
               Oleh {{ $post->user->name }} • {{ $post->created_at->translatedFormat('d F Y') }}
