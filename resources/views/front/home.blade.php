@@ -7,7 +7,7 @@
       Selamat Datang di Blog Kami
     </h1>
     <p class="text-lg text-gray-600">
-      Temukan tulisan inspiratif, ide-ide baru, dan cerita menarik dari para penulis kami.
+      Media berita terkini menyampaikan informasi berita terbaru Indonesia dan Global yang terpopuler dan terpercaya.
     </p>
   </section>
 
