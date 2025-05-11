@@ -14,7 +14,7 @@
             <a class="h-fit rounded-md bg-emerald-500 px-3 py-1.5 text-sm font-semibold text-white hover:bg-emerald-600" href="{{ route('back.posts.create') }}">Create Post</a>
           </div>
           <div class="overflow-x-auto border border-gray-300">
-            <table class="min-w-full divide-y divide-gray-200">
+            <table class="min-w-full table-auto divide-y divide-gray-200" id="post-table">
               <thead class="bg-gray-50">
                 <tr>
                   <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">No.</th>
@@ -28,8 +28,10 @@
                 @forelse ($posts as $post)
                   <tr class="">
                     <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-700">{{ $loop->iteration }}</td>
-                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-900">{{ $post->thumbnail }}</td>
-                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-600">{{ $post->title }}</td>
+                    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-900">
+                      <img class="max-h-40" src="{{ asset('storage/' . $post->thumbnail) }}" alt="">
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-600">{{ $post->title }}</td>
                     <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-600">{{ $post->created_at->format('d M Y, H:i') }}</td>
                     <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
                       <a class="mr-2 text-indigo-600 hover:text-indigo-900" href="{{ route('back.posts.edit', $post) }}">
