@@ -2,7 +2,7 @@
 
 @section('title', 'Home')
 @section('content')
-  <section class="bg-white px-4 py-16 text-center">
+  <section class="bg-gradient bg-gradient-to-b from-white to-gray-50 px-4 py-24 text-center">
     <h1 class="mb-4 text-4xl font-extrabold text-gray-800 md:text-5xl">
       Selamat Datang di Blog Kami
     </h1>
