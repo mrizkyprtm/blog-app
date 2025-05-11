@@ -37,7 +37,12 @@
       @forelse ($posts as $post)
         <div class="overflow-hidden rounded-lg bg-white shadow-md transition duration-300 hover:shadow-lg">
           @if ($post->thumbnail)
-            <img class="h-48 w-full object-cover" src="{{ asset('storage/' . $post->thumbnail) }}" alt="Thumbnail">
+            <div class="relative h-48 overflow-hidden">
+              <img class="w-full object-cover transition group-hover/posts:scale-105" src="{{ asset('storage/' . $post->thumbnail) }}" alt="Thumbnail">
+              <div class="absolute left-2 top-2 z-20 rounded-lg bg-emerald-500 px-2 py-1.5 text-sm font-semibold text-white">
+                {{ $post->category->name }}
+              </div>
+            </div>
           @endif
           <div class="p-5">
             <h3 class="mb-2 text-lg font-bold text-gray-800">
