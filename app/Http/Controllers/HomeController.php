@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
   public function __invoke(Request $request)
   {
-    $query = Post::with('user');
+    $query = Post::with('user', 'category');
 
     if ($request->filled('search')) {
       $query->where('title', 'like', '%' . $request->search . '%');
     }
 
-    if ($request->filled('author')) {
-      $query->where('user_id', $request->author);
+    if ($request->filled('category')) {
+      $category = Category::where('slug', $request->category)->first('id');
+      $query->where('category_id', $category->id);
     }
 
     if ($request->filled('order') && in_array($request->order, ['asc', 'desc'])) {
@@ -26,9 +27,8 @@ class HomeController extends Controller
       $query->latest();
     }
 
-    $posts = $query->latest()->paginate(10)->withQueryString();
-    $authors = User::orderBy('name')->get();
-    // $posts = Post::with('user')->latest()->get();
-    return view('front.home', compact('posts', 'authors'));
+    $posts = $query->latest()->paginate(6)->withQueryString();
+    $categories = Category::orderBy('name')->get();
+    return view('front.home', compact('posts', 'categories'));
   }
 }
