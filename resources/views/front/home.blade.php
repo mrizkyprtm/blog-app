@@ -60,5 +60,8 @@
         <p class="text-gray-500">Postingan tidak ada.</p>
       @endforelse
     </div>
+    <div class="mt-4">
+      {{ $posts->links() }}
+    </div>
   </section>
 @endsection
