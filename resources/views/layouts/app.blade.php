@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="light" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
   <meta charset="utf-8">
@@ -14,6 +14,7 @@
 
   <!-- Scripts -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])
+  @stack('styles')
 </head>
 
 <body class="font-sans antialiased">
@@ -35,14 +36,7 @@
     </main>
   </div>
 
-  <script src="{{ asset('/vendor/ckeditor/ckeditor.js') }}"></script>
-  <script>
-    ClassicEditor
-      .create(document.querySelector('#body'))
-      .catch(error => {
-        console.error(error);
-      });
-  </script>
+  @stack('scripts')
 </body>
 
 </html>

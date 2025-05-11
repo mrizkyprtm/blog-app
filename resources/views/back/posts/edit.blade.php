@@ -41,4 +41,15 @@
       </div>
     </div>
   </div>
+
+  @push('scripts')
+    <script src="{{ asset('/vendor/ckeditor/ckeditor.js') }}"></script>
+    <script>
+      ClassicEditor
+        .create(document.querySelector('#body'))
+        .catch(error => {
+          console.error(error);
+        });
+    </script>
+  @endpush
 </x-app-layout>
