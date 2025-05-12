@@ -21,21 +21,6 @@ class DatabaseSeeder extends Seeder
     //     'email' => 'test@example.com',
     // ]);
 
-    $categories = [
-      'Nasional',
-      'Global',
-      'Politik',
-      'Ekonomi',
-      'Hukum',
-      'Hiburan',
-      'Kesehatan'
-    ];
-
-    foreach ($categories as $category) {
-      Category::create([
-        'name' => $category,
-        'slug' => str()->lower($category),
-      ]);
-    }
+    $this->call(CategorySeeder::class);
   }
 }
