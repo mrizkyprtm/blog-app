@@ -32,7 +32,7 @@ class FrontPostController extends Controller
   {
     $post->load('user', 'comments.replies.user', 'comments.user', 'category');
     $totalComments = $post->comments->count();
-    $otherPosts = Post::whereNot('id', $post->id)->inRandomOrder()->take(5)->get();
+    $otherPosts = Post::with('category')->whereNot('id', $post->id)->inRandomOrder()->take(5)->get();
     return view('front.posts.show', compact('post', 'totalComments', 'otherPosts'));
   }
 }

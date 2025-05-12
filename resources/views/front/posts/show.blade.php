@@ -133,8 +133,12 @@
           @foreach ($otherPosts as $other)
             <div>
               <a href="{{ route('posts.show', $other) }}">
-                <div class="line-clamp-3 rounded-md px-2 py-3 font-semibold transition-colors hover:text-blue-700">
-                  {{ $other->title }}
+                <div class="flex gap-2 rounded-md py-3">
+                  <img class="h-18 aspect-video shrink-0 rounded-md object-cover" src="{{ asset('storage/' . $other->thumbnail) }}" alt="">
+                  <div class="flex-1">
+                    <p class="line-clamp-2 text-wrap text-sm font-semibold transition-colors hover:text-blue-700">{{ $other->title }}</p>
+                    <p class="mt-1 text-xs">{{ $other->created_at->translatedFormat('D, d M Y') }} • <a class="hover:underline" href="{{ route('posts.category', $other->category->slug) }}">{{ $other->category->name }}</a></p>
+                  </div>
                 </div>
               </a>
             </div>
