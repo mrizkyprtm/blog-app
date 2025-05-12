@@ -4,8 +4,9 @@
       <!-- Brand & Menu -->
       <div class="flex items-center">
         <a class="text-xl font-bold text-blue-600" href="{{ route('home') }}">Simple Blog</a>
-        <nav class="ml-10 hidden space-x-4 md:flex">
+        <nav class="ml-10 hidden space-x-8 md:flex">
           <a class="text-gray-700 transition hover:text-blue-600" href="{{ route('home') }}">Home</a>
+          <a class="text-gray-700 transition hover:text-blue-600" href="{{ route('posts.index') }}">Blog</a>
         </nav>
       </div>
 
@@ -37,6 +38,7 @@
   <!-- Mobile Nav -->
   <div class="space-y-4 bg-white px-4 pb-4 font-medium md:hidden" x-show="open" x-transition>
     <a class="block text-gray-700 hover:text-blue-600" href="{{ route('home') }}">Home</a>
+    <a class="block text-gray-700 hover:text-blue-600" href="{{ route('posts.index') }}">Blog</a>
 
     @auth
       <a class="inline-block rounded-sm border border-[#19140035] bg-rose-500 px-5 py-1.5 text-sm leading-normal text-white transition hover:border-[#1915014a]" href="{{ url('/dashboard') }}">
