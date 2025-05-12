@@ -61,7 +61,7 @@
                   </tr>
                 @empty
                   <tr>
-                    <td class="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-700" colspan="5">No Post Found.</td>
+                    <td class="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-700" colspan="6">No Post Found.</td>
                   </tr>
                 @endforelse
               </tbody>
