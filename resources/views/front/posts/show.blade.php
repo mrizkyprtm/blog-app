@@ -5,9 +5,11 @@
   <section class="mx-auto flex max-w-6xl flex-col justify-between gap-y-4 py-12 lg:flex-row lg:px-4">
     <article class="card w-full max-sm:px-3 lg:w-[68%]">
       <div class="card-body">
-        <div class="mb-2 w-fit rounded-lg bg-emerald-500/20 px-4 py-2 text-sm font-semibold text-emerald-500">
-          {{ $post->category->name }}
-        </div>
+        <a href="{{ route('posts.category', $post->category->slug) }}">
+          <div class="mb-2 w-fit rounded-lg bg-emerald-500/20 px-4 py-2 text-sm font-semibold text-emerald-500">
+            {{ $post->category->name }}
+          </div>
+        </a>
         <div class="">
           <h1 class="card-title text-3xl font-bold">{{ $post->title }}</h1>
           <div class="my-6 flex items-center">
@@ -15,7 +17,9 @@
               <img src="https://placehold.co/50x50?text=Profile" alt="">
             </div>
             <div class="ml-4">
-              <p class="font-semibold">{{ $post->user->name }}</p>
+              <a href="{{ route('posts.author', $post->user->username) }}">
+                <p class="font-semibold">{{ $post->user->name }}</p>
+              </a>
               <p><span class="text-sm text-black/50">{{ $post->created_at->translatedFormat('D, d M Y') . ' | ' . $post->created_at->diffForHumans() }}</span></p>
             </div>
           </div>
