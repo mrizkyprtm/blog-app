@@ -6,12 +6,17 @@
     <h1 class="text-xl font-bold leading-tight tracking-tight text-zinc-900 md:text-2xl">
       Buat Akun Anda
     </h1>
-    <form class="space-y-4 md:space-y-6" action="{{ route('register') }}" method="post">
+    <form class="space-y-4" action="{{ route('register') }}" method="post">
       @csrf
       <div>
         <label class="mb-2 block text-sm font-medium text-zinc-900" for="name">Nama</label>
         <input class="block w-full rounded-lg border border-zinc-300 bg-zinc-50 p-2.5 text-zinc-900 focus:border-blue-600 focus:ring-blue-600 sm:text-sm" id="name" name="name" type="text" placeholder="Masukan nama anda" required autofocus>
         <x-input-error class="mt-2" :messages="$errors->get('name')" />
+      </div>
+      <div>
+        <label class="mb-2 block text-sm font-medium text-zinc-900" for="username">Username</label>
+        <input class="block w-full rounded-lg border border-zinc-300 bg-zinc-50 p-2.5 text-zinc-900 focus:border-blue-600 focus:ring-blue-600 sm:text-sm" id="username" name="username" type="text" placeholder="Masukan username anda" required>
+        <x-input-error class="mt-2" :messages="$errors->get('username')" />
       </div>
       <div>
         <label class="mb-2 block text-sm font-medium text-zinc-900" for="email">Email</label>
