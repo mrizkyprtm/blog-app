@@ -45,21 +45,21 @@
           @guest
             <div class="my-3 flex items-center justify-center rounded-md bg-gray-100 px-4 py-8 font-medium">
               <p class="text-center">
-                Anda harus terdaftar sebagai pengguna untuk menambahkan komentar. Silahkan
+                Anda harus terdaftar sebagai pengguna untuk dapat menambahkan komentar. Silahkan
                 <a class="text-blue-600 underline" href="{{ route('login') }}">Login</a> atau <a class="text-blue-600 underline" href="{{ route('register') }}">Register</a>.
               </p>
             </div>
           @endguest
 
           <hr class="border-1 my-6 border-neutral-200">
-          <h3 class="flex items-center gap-2 font-bold">
+          <h3 class="mb-2 flex items-center gap-2 font-bold">
             Comments
             <span class="w-fit rounded-full border border-blue-500 bg-blue-500 px-2 py-1 text-xs font-semibold leading-none text-white">
               {{ $totalComments }}
             </span>
           </h3>
           @foreach ($post->comments->whereNull('parent_id') as $comment)
-            <div class="py-3 text-sm font-normal">
+            <div class="py-2 text-sm font-normal">
               <div class="flex items-start">
                 <div class="w-full">
                   <div class="pl-2">
@@ -67,7 +67,7 @@
                     <p class="mb-1.5">{{ $comment->body }}</p>
                   </div>
                   @auth
-                    <div class="flex gap-1 pl-2 font-medium">
+                    <div class="mb-1 flex gap-1 pl-2 font-medium">
                       <button class="cursor-pointer rounded-md px-2 py-1 text-xs text-gray-500 transition-colors hover:bg-gray-100" title="Balas komentar" onclick="toggleReplyForm({{ $comment->id }})">
                         <i class="fa-solid fa-reply mr-0.5 text-xs"></i>
                         Balas
@@ -85,7 +85,7 @@
                     </div>
                   @endauth
 
-                  <form class="mt-1 hidden w-full pl-2" id="reply-form-{{ $comment->id }}" method="post" action="{{ route('comments.store', $post) }}">
+                  <form class="mb-1 hidden w-full pl-2" id="reply-form-{{ $comment->id }}" method="post" action="{{ route('comments.store', $post) }}">
                     @csrf
                     <input name="parent_id" type="hidden" value="{{ $comment->id }}">
                     <textarea class="mt-1 w-full rounded border-black/15 p-2 text-sm" name="body" required placeholder="Tulis Balasan..."></textarea>
@@ -94,7 +94,7 @@
 
                   <div class="ml-2 border-l-2 border-gray-300">
                     @foreach ($comment->replies as $reply)
-                      <div class="mt-3 flex items-start pl-3">
+                      <div class="flex items-start py-2 pl-3">
                         <div class="ml-2">
                           <p class="mb-1 font-semibold leading-5">{{ $reply->user->name }}
                             <span class="ml-1 text-xs font-normal text-gray-500">• {{ $reply->created_at->longRelativeDiffForHumans() }}</span>
