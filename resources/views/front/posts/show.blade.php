@@ -27,7 +27,7 @@
         <div class="aspect-16/9 mb-4 overflow-hidden rounded-md">
           <img class="h-full w-full object-cover transition-transform hover:scale-105" src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->title }}">
         </div>
-        <div class="mt-2 space-y-4 leading-relaxed">{!! $post->body !!}</div>
+        <div class="prose prose-base mt-2 max-w-none">{!! $post->body !!}</div>
 
         <div class="mt-12 rounded">
           <h4 class="mb-4 text-lg font-bold">Tinggalkan Komentar:</h4>
