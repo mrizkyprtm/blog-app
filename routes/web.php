@@ -8,7 +8,10 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
+Route::get('/posts', [FrontPostController::class, 'index'])->name('posts.index');
 Route::get('/posts/read/{post:slug}', [FrontPostController::class, 'show'])->name('posts.show');
+Route::get('/posts?category={category:slug}', [FrontPostController::class, 'index'])->name('posts.category');
+Route::get('/posts?author={user:username}', [FrontPostController::class, 'index'])->name('posts.author');
 
 Route::get('/dashboard', function () {
   return view('dashboard');
